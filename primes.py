@@ -33,13 +33,22 @@ def primes(max_number_of_primes) -> iter:
     while next(number_primes) <= max_number_of_primes:
         yield next(prime)
         
-        
-def print_primes(N):
-    for p in primes(N):
-        print(p)
+    
             
 def prime_array(number_of_primes) -> array:
     p = array('i',list(primes(number_of_primes)))
     return p
 
+def save_prime_array(number_of_primes) -> None:
+    p = prime_array(number_of_primes)
+    with open(f'prime{number_of_primes}.bin', 'wb') as prime_file:
+        p.tofile(prime_file)
+        
+    return None
+
+def get_prime_array(number_of_primes) -> array:
+    p = array('i')
+    with open(f'prime{number_of_primes}.bin', 'rb') as prime_file:
+        p.fromfile(prime_file, number_of_primes)       
+    return p
                 
